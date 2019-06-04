@@ -1,0 +1,23 @@
+version: "2"
+services:
+  xyz:
+    build: ./spring-eureka-server
+    network_mode: host
+
+  track:
+    build: ./musixservice
+    network_mode: host
+    depends_on: spring-eureka-server
+
+  server-config:
+    build: ./spring-config-server
+    network_mode: host
+
+  api:
+    build: ./spring-boot-zuulgatwayproxy-micro-service
+    network_mode: host
+
+  user:
+    build: ./userservice
+    network_mode: host
+    depends_on: spring-eureka-server
